@@ -4,7 +4,7 @@ from typing import List
 
     
 PROJECT_NAME = "housing_predictor"
-PROJECT_VERSION = "0.0.2"
+PROJECT_VERSION = "0.0.3"
 AUTHOR = "Jishnu"
 DESCRIPTION = "This is a package to predict the price of a house based on certain features."
 PACKAGES = ["housing"]
