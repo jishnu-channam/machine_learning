@@ -73,7 +73,7 @@ class Configuration:
     def get_model_pusher_config(self) -> ModelPusherConfig:  
         pass
 
-    def get_training_pipeline_config(self) -> TrainingPipelineConfig:
+    def  get_training_pipeline_config(self) -> TrainingPipelineConfig:
         try: 
              training_pipeline_config = self.config_file_info[TRAINING_PIPELINE_CONFIG_KEY]
              artifact_dir = os.path.join(ROOT_DIR, 
