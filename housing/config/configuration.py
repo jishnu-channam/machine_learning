@@ -29,7 +29,6 @@ class Configuration:
 
     def get_data_ingestion_config(self) -> DataIngestionConfig:
         try:
-            raise Exception("Testing Exception")
             artifact_dir = self.training_pipeline_config.artifact_dir
             data_ingestion_artifact_dir = os.path.join(artifact_dir, DATA_INGESTION_ARTIFACT_DIR, self.current_time_stamp)
             data_ingestion_info = self.config_file_info[DATA_INGESTION_CONFIG_KEY]
@@ -60,10 +59,33 @@ class Configuration:
             raise HousingException(e, sys) from e
 
     def get_data_validation_config(self) -> DataValidationConfig:
-        try:
-            schema_file_path = None
+        try:    
+
+            artifact_dir = self.training_pipeline_config.artifact_dir
+            data_validation_artifact_dir = os.path.join(
+                artifact_dir,
+                DATA_VALIDATION_ARTIFACT_DIR_NAME,
+                self.current_time_stamp
+            )
+            
+            data_validation_config = self.config_file_info[DATA_CONFIGURATION_CONFIG_KEY]
+
+            schema_file_path = os.path.join(ROOT_DIR, 
+            data_validation_config[DATA_VALIDATION_SCHEMA_DIR_KEY],
+            data_validation_config[DATA_VALIDATION_SCHEMA_FILE_NAME_KEY])
+
+            report_file_path = os.path.join(data_validation_artifact_dir, 
+            data_validation_config[DATA_VALIDATION_REPORT_FILE_NAME])
+
+            report_page_file_path = os.path.join(data_validation_artifact_dir, 
+            data_validation_config[DATA_VALIDATION_REPORT_PAGE_FILE_NAME_KEY])
+
+            
+
             data_validation_config = DataValidationConfig(
-                schema_file_path= schema_file_path
+                schema_file_path= schema_file_path, 
+                report_file_path= report_file_path,
+                report_page_file_path= report_page_file_path
             )
 
             return data_validation_config
